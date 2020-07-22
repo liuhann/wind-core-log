@@ -15,7 +15,7 @@ module.exports = {
                 out: { type: 'stdout' },
                 app: {
                     type: 'file',
-                    filename: 'application.log'
+                    filename: '.log/app.log'
                 }
             },
             categories: {
@@ -28,6 +28,11 @@ module.exports = {
 
         // 默认日志logger 设置到ctx 的logger字段
         app.logger = app.context.logger = logSerivce.getLogger();
+        app.debug = app.context.debug = function() {
+            if (app.logger.isDebugEnabled()) {
+                app.logger.debug(arguments)
+            }
+        }
         // getLogger方法设置为ctx对应方法
         app.getLogger = app.context.getLogger = logSerivce.getLogger;
     },
