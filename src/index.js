@@ -28,13 +28,14 @@ module.exports = {
 
         // 默认日志logger 设置到ctx 的logger字段
         app.logger = app.context.logger = logSerivce.getLogger();
-        app.debug = app.context.debug = function() {
-            if (app.logger.isDebugEnabled()) {
-                app.logger.debug(arguments)
-            }
-        }
         // getLogger方法设置为ctx对应方法
         app.getLogger = app.context.getLogger = logSerivce.getLogger;
+
+        app.debug = app.context.debug = app.logger.debug
+        app.info = app.context.info = app.logger.info
+        app.warn = app.context.warn = app.logger.warn
+        app.error = app.context.error = app.logger.error
+        app.fatal = app.context.fatal = app.logger.fatal
     },
 
     // 模块路由注册，对外提供API可在此写api相关地址
