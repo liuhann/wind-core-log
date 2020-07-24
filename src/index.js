@@ -31,11 +31,11 @@ module.exports = {
         // getLogger方法设置为ctx对应方法
         app.getLogger = app.context.getLogger = logSerivce.getLogger;
 
-        app.debug = app.context.debug = app.logger.debug
-        app.info = app.context.info = app.logger.info
-        app.warn = app.context.warn = app.logger.warn
-        app.error = app.context.error = app.logger.error
-        app.fatal = app.context.fatal = app.logger.fatal
+        app.debug = app.context.debug = app.logger.debug.bind(app.logger)
+        app.info = app.context.info = app.logger.info.bind(app.logger)
+        app.warn = app.context.warn = app.logger.warn.bind(app.logger)
+        app.error = app.context.error = app.logger.error.bind(app.logger)
+        app.fatal = app.context.fatal = app.logger.fatal.bind(app.logger)
     },
 
     // 模块路由注册，对外提供API可在此写api相关地址
